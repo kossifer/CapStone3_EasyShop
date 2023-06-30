@@ -25,7 +25,7 @@ public class ProductsController
     }
 
     @GetMapping("")
-    @PreAuthorize("permitAll()")
+    //@PreAuthorize("permitAll()")
     public List<Product> search(@RequestParam(name="cat", required = false) Integer categoryId,
                                 @RequestParam(name="minPrice", required = false) BigDecimal minPrice,
                                 @RequestParam(name="maxPrice", required = false) BigDecimal maxPrice,
@@ -81,7 +81,10 @@ public class ProductsController
     {
         try
         {
-            productDao.create(product);
+            // update the category by id
+            productDao.update(id,product);
+            product.setProductId(id);
+
         }
         catch(Exception ex)
         {
